@@ -9,6 +9,7 @@
 *--Select all information for the top ten best-selling games*
 *-- Order the results from best-selling game down to tenth best-selling*
 
+```sql
 SELECT * 
 
 FROM game_sales
@@ -16,7 +17,7 @@ FROM game_sales
 ORDER BY games_sold DESC
 
 LIMIT 10;
-
+```
 *10 rows affected.*
 
 ### 2. Missing review scores
@@ -25,6 +26,7 @@ LIMIT 10;
 
 *-- Select a count of the number of games where both critic_score and user_score are null*
 
+```sql
 SELECT COUNT(g.game)
 
 FROM game_sales AS g
@@ -34,7 +36,7 @@ LEFT JOIN reviews AS r
 ON g.game = r.game
 
 WHERE critic_score IS NULL AND user_score IS NULL
-
+```
 
 ![Screenshot 2023-11-05 200505](https://github.com/ZinaidaK/Golden-Age-of-Video-Games/assets/100050035/c53b16ad-df6c-4a40-88d6-778d9a54094a)
 
@@ -49,6 +51,7 @@ WHERE critic_score IS NULL AND user_score IS NULL
 
 *-- Order the data from highest to lowest avg_critic_score and limit to 10 results*
   
+```sql
 SELECT g.year, ROUND(AVG(r.critic_score),2) AS avg_critic_score  
 
 FROM game_sales AS g
@@ -62,6 +65,7 @@ GROUP BY g.year
 ORDER BY avg_critic_score DESC 
 
 LIMIT 10;
+```
 
 ![Screenshot 2023-11-05 200846](https://github.com/ZinaidaK/Golden-Age-of-Video-Games/assets/100050035/58ea8f5e-e776-4fda-a5bc-47fdcb402df8)
 
@@ -76,6 +80,7 @@ LIMIT 10;
   *-- Order the data from highest to lowest avg_critic_score and limit to 10 results* 
   
   
+```sql
 SELECT g.year, COUNT(g.game) AS num_games, ROUND(AVG(r.critic_score),2) AS avg_critic_score 
 
 FROM game_sales AS g
@@ -93,7 +98,7 @@ ORDER BY avg_critic_score DESC
 LIMIT 10;
 
 10 rows affected.
-
+```
 
 ### 5. Years that dropped off the critics' favorites list
 
@@ -105,6 +110,7 @@ It's time to brush off your set theory skills. To get started, we've created tab
 ![Screenshot 2023-11-05 202524](https://github.com/ZinaidaK/Golden-Age-of-Video-Games/assets/100050035/6d7fecf7-cb28-4422-8acb-f19ac9167247)
 
 
+```sql
 SELECT year, avg_critic_score 
 
 FROM top_critic_years
@@ -116,11 +122,13 @@ SELECT year, avg_critic_score
 FROM top_critic_years_more_than_four_games
 
 ORDER BY avg_critic_score
+```
 
 ![Screenshot 2023-11-05 202704](https://github.com/ZinaidaK/Golden-Age-of-Video-Games/assets/100050035/08bd7187-7fe6-49de-a776-809075388ff7)
 
 ### 6. Years video game players loved
 
+```sql
 SELECT g.year, ROUND(AVG(r.user_score),2) AS avg_user_score, COUNT(g.game) AS num_games
 
 FROM game_sales AS g
@@ -136,11 +144,13 @@ HAVING COUNT(g.game) >4
 ORDER BY avg_user_score DESC
 
 LIMIT 10;
+```
 
 *10 rows affected.*
 
 ### 7. Years that both players and critics loved
 
+```sql
 SELECT year
 
 FROM top_critic_years_more_than_four_games
@@ -150,6 +160,7 @@ INTERSECT
 SELECT year
 
 FROM top_user_years_more_than_four_games
+```
 
 *-- Select the year results that appear on both tables*
 
@@ -164,6 +175,7 @@ year
 
 ### 8. Sales in the best video game years
 
+```sql
 SELECT year, SUM(games_sold) AS total_games_sold
 
 FROM game_sales
@@ -187,6 +199,7 @@ FROM top_user_years_more_than_four_games
 GROUP BY year
 
 ORDER BY total_games_sold DESC;
+```
 
 
 *3 rows affected.*
