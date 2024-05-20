@@ -1,5 +1,7 @@
-# Golden-Age-of-Video-Games
-SQL. Guided project from DataCamp
+# Golden-Age-of-Video-Games 
+
+![Fate-of-Game-Preservation-Games-GettyImages-1170073827](https://github.com/ZinaidaK/Golden-Age-of-Video-Games/assets/100050035/95bf4a74-6170-4e60-9e13-690635abd3f7)
+
 
 ## When Was the Golden Age of Video Games?
 
